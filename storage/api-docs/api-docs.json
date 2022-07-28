@@ -1,0 +1,162 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Your super  ApplicationAPI",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/bid": {
+            "get": {
+                "tags": [
+                    "bid"
+                ],
+                "summary": "bid list",
+                "description": "bid list",
+                "operationId": "bid_list",
+                "parameters": [
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "фильтрация по колонки выборки",
+                        "schema": {
+                            "properties": {
+                                "status": {
+                                    "type": "string",
+                                    "enum": [
+                                        "Active",
+                                        "Resolved"
+                                    ],
+                                    "example": "Resolved"
+                                }
+                            },
+                            "type": "object"
+                        },
+                        "example": "filter[status]=Active"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "list"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "bid"
+                ],
+                "summary": "edit bid",
+                "description": "edit bid",
+                "operationId": "edit_bid",
+                "requestBody": {
+                    "description": "Change bid",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "comment"
+                                ],
+                                "properties": {
+                                    "comment": {
+                                        "type": "string",
+                                        "example": "Test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "422": {
+                        "description": "validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "comment": {
+                                            "type": "string",
+                                            "example": "The comment field is required"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "bid"
+                ],
+                "summary": "add bid",
+                "description": "add bid",
+                "operationId": "bid_add",
+                "requestBody": {
+                    "description": "Add info",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "name",
+                                    "message"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "format": "email",
+                                        "example": "user1@mail.com"
+                                    },
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Sergey"
+                                    },
+                                    "message": {
+                                        "type": "string",
+                                        "example": "Test"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "422": {
+                        "description": "validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "name": {
+                                            "type": "string",
+                                            "example": "The name field is required"
+                                        },
+                                        "email": {
+                                            "type": "string",
+                                            "example": "The email field is required"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "example": "The message field is required"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
