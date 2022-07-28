@@ -32,7 +32,6 @@ class MailJob implements ShouldQueue
      */
     public function handle()
     {
-       echo "TEST";
         //Mail::to($this->email)->send(new NewBidMail($this->comment));
     }
 }
